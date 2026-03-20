@@ -99,6 +99,28 @@
   background-position: center 20%;         /* 微调取景 */
   filter: brightness(0.6) saturate(0.95);  /* 明暗可微调 */
 }
+    /* ——移动端专项优化—— */
+@media (max-width: 768px){
+  .hero{
+    min-height: 78vh;
+  }
+  .hero::before{
+    background-position: center 10%;
+    background-size: cover;
+    filter: brightness(0.68) saturate(0.95);
+    transform: none;
+  }
+}
+@media (max-width: 480px){
+  .hero{
+    min-height: 82vh;
+  }
+  .hero::before{
+    background-position: center 6%;
+    filter: brightness(0.7) saturate(0.95);
+  }
+}
+
   </style>
 </head>
 <body>
