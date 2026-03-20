@@ -112,6 +112,12 @@
       .hero-subtitle{font-size:.9rem}
       .section{margin-top:16px}
     }
+        /* ── Hero 只显示图片，隐藏文字 ── */
+    .hero-content { display: none; }
+    .hero         { height: 280px; }
+
+    @media(max-width: 768px){ .hero{ height: 220px; } }
+    @media(max-width: 480px){ .hero{ height: 180px; } }
   </style>
 </head>
 <body>
