@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>白莲花大饭店｜入住人格测试</title>
+  <title>白莲花大饭店｜文创测试</title>
   <style>
     :root{
-      --bg:#0b0a09;--text:#e9e1d3;--muted:#c9b99b;
-      --accent:#c59b5a;--line:rgba(197,155,90,0.35);
-      --card:#181613;--card2:#1e1b17;--shadow:rgba(0,0,0,0.35);
+      --bg:#0b0a09;--panel:#12100e;--text:#e9e1d3;--muted:#c9b99b;
+      --accent:#c59b5a;--line:rgba(197,155,90,0.35);--card:#181613;
+      --card2:#1e1b17;--shadow:rgba(0,0,0,0.35);
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
@@ -16,67 +16,62 @@
       "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.6}
     .container{width:100%;max-width:920px;margin:0 auto;padding:0 18px}
 
-    /* ── Hero ── */
+    /* Hero */
     .hero{
-      position:relative;width:100%;height:320px;
+      position:relative;width:100%;height:500px;
       display:flex;align-items:flex-end;justify-content:center;text-align:center;
-      overflow:hidden;border-bottom:1px solid var(--line);background:#0a0806;
+      overflow:hidden;border-bottom:0px solid var(--line);background:#0a0806;
     }
     .hero::before{
       content:"";position:absolute;inset:0;
       background-image:url('./images/hero.jpg');
-      background-size:cover;background-position:center 20%;
-      filter:brightness(0.55) saturate(0.95);
-      z-index:0;
+      background-size:cover;background-position:center center;
+      filter:brightness(1) saturate(1);
     }
     .hero::after{
       content:"";position:absolute;inset:0;
-      background:linear-gradient(to bottom,rgba(10,8,6,0.05),rgba(10,8,6,0.72));
-      z-index:1;
+      background:radial-gradient(60% 60% at 50% 40%,rgba(10,8,6,0) 0%,rgba(10,8,6,0) 55%,rgba(10,8,6,0) 100%),
+        linear-gradient(to bottom,rgba(10,8,6,0),rgba(10,8,6,0));
     }
-    /* ★ z-index:2 确保文字在渐变层之上 */
-    .hero-content{
-      position:relative;z-index:2;
-      padding:1.4rem 1rem 1.8rem;
-      text-shadow:0 2px 10px rgba(0,0,0,0.8);
-    }
-    .hero-title{margin:0 0 .25rem;font-size:2.2rem;letter-spacing:.08em;font-weight:700}
-    .hero-subtitle{margin:.2rem 0 .5rem;color:var(--muted);font-size:1rem;letter-spacing:.06em}
-    .hero-quote{margin:.3rem 0 0;color:var(--accent);font-style:italic;font-size:.9rem}
-    .divider{width:90px;height:1px;background:var(--line);margin:.7rem auto 0}
+    .hero-content{position:relative;z-index:1;padding:1.6rem 1rem 2rem;text-shadow:0 2px 8px var(--shadow);display:none}
+    .hero-title{margin:0 0 .3rem;font-size:2.4rem;letter-spacing:.08em;font-weight:700;display:none}
+    .hero-subtitle{margin:.2rem 0 .6rem;color:var(--muted);font-size:1.1rem;letter-spacing:.06em;display:none}
+    .hero-quote{margin-top:.3rem;color:var(--accent);opacity:.92;font-style:italic;font-size:.95rem;display:none}
+    .divider{width:100px;height:1px;background:var(--line);margin:.8rem auto 0;opacity:.9;display:none}
 
-    /* ── 内容卡片 ── */
+    /* 内容卡片 */
     .section{
       background:linear-gradient(180deg,var(--card),var(--card2));
       border:1px solid var(--line);border-radius:12px;padding:22px 18px;
       box-shadow:0 8px 28px var(--shadow);
-      /* ★ 不用负边距，改用正常 margin，彻底避免重叠 */
-      margin:24px auto 32px;
+      margin:240px auto 32px; /* 增加顶部间距到400px */
       position:relative;z-index:2;
     }
     .intro{color:var(--muted);margin-bottom:14px;text-align:justify}
 
     .progress-container{
       margin:14px 0 18px;background:#141210;
-      border:1px solid var(--line);border-radius:999px;padding:5px;
+      border:1px solid var(--line);border-radius:999px;padding:6px;
     }
     .progress{
-      height:8px;border-radius:999px;
+      height:10px;border-radius:999px;
       background:linear-gradient(90deg,#7a5b2b,var(--accent));
       width:0%;transition:width .35s ease;
     }
 
     .question-container{
-      margin-top:10px;background:#151310;
+      margin-top:36px;background:#151310;
       border:1px solid var(--line);border-radius:10px;padding:16px;
     }
-    .question{font-size:1.05rem;margin:0 0 14px;line-height:1.6}
+    .question{font-size:1.1rem;margin:0 0 14px;line-height:1.5}
     .options{display:grid;gap:10px}
+
+    /* ★ 关键：option 必须是 block 级，宽度撑满 */
     .option{
       display:block;width:100%;
       padding:12px 14px;border:1px solid var(--line);border-radius:8px;
       background:#191714;color:var(--text);cursor:pointer;
-      transition:all .2s ease;text-align:left;font-size:.97rem;
+      transition:all .2s ease;text-align:left;font-size:1rem;
     }
     .option:hover{border-color:var(--accent);background:#201d18}
     .option.selected{
@@ -84,15 +79,18 @@
       box-shadow:0 0 0 1px var(--accent) inset;
     }
 
-    .actions{display:flex;gap:10px;margin-top:14px}
+    .actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
     .btn{
       padding:10px 20px;border-radius:8px;border:1px solid var(--line);
       background:#1d1a16;color:var(--text);cursor:pointer;
-      transition:all .2s ease;font-size:.97rem;
+      transition:all .2s ease;font-size:1rem;
     }
-    .btn:hover:not(:disabled){border-color:var(--accent);background:#242018}
-    .btn:disabled{opacity:.38;cursor:not-allowed}
-    .btn.primary{background:linear-gradient(180deg,#2a241d,#1f1a14);border-color:var(--accent)}
+    .btn:hover{border-color:var(--accent);background:#242018}
+    .btn:disabled{opacity:.4;cursor:not-allowed}
+    .btn.primary{
+      background:linear-gradient(180deg,#2a241d,#1f1a14);
+      border-color:var(--accent);
+    }
     .btn.primary:hover:not(:disabled){filter:brightness(1.1)}
 
     .result{
@@ -100,46 +98,41 @@
       border-radius:10px;background:#16130f;color:var(--muted);line-height:1.8;
     }
 
-    footer{color:var(--muted);opacity:.7;text-align:center;padding:24px 18px 40px;font-size:.88rem}
+    footer{color:var(--muted);opacity:.8;text-align:center;padding:28px 18px 40px}
 
     @media(max-width:768px){
-      .hero{height:260px}
-      .hero-title{font-size:1.9rem}
+      .hero{height:280px}
+      .hero-title{font-size:2rem}
+      .section{margin-top:20px}
     }
     @media(max-width:480px){
-      .hero{height:220px}
-      .hero-title{font-size:1.6rem}
-      .hero-subtitle{font-size:.9rem}
-      .section{margin-top:16px}
+      .hero{height:240px}
+      .hero-title{font-size:1.7rem}
+      .hero-subtitle{font-size:.92rem}
+      .section{margin-top:20px}
     }
-    /* ── Hero 只显示图片，隐藏文字 ── */
-    .hero-content { display: none; }
-    .hero         { height: 360px; border-bottom: none; }
-
-    @media(max-width: 768px){ .hero{ height: 300px; } }
-    @media(max-width: 480px){ .hero{ height: 240px; } }
-
-
-  </style>
-</head>
-
   </style>
 </head>
 <body>
 
-<header class="hero">
+<header class="hero" role="banner">
   <div class="hero-content">
     <h1 class="hero-title">白莲花大饭店</h1>
-    <div class="hero-subtitle">入住人格测试</div>
+    <div class="hero-subtitle">文创测试</div>
     <div class="divider"></div>
-    <p class="hero-quote">"顺利入住，然后成为猎物"</p>
+    <p class="hero-quote">"跟着第一反应作答"</p>
   </div>
 </header>
 
 <main class="container">
   <section class="section">
     <p class="intro">
-      欢迎来到白莲花大饭店。请根据你的直觉作答，整套问卷大约需要 2–3 分钟。答案没有对错，放松心态，跟随第一反应即可。
+      亲爱的旅人，当你看到这卷测试的时候<br>
+你正在人生的路口上<br>
+是成为被谋杀阴影笼罩的自由之人<br>
+还是停留在酒店制服以内的永恒侍者<br>
+答案没有对错，请追随心之所想<br>
+本酒店保留一切关于命运的解释权
     </p>
     <div class="progress-container">
       <div id="progress" class="progress"></div>
@@ -156,63 +149,114 @@
   </section>
 </main>
 
-<footer>© 白莲花大饭店｜人格测试 · 仅供娱乐</footer>
+<footer>© 白莲花大饭店｜文创测试 · 仅供娱乐</footer>
 
 <script>
-// ★ 所有中文弯引号统一改为直角引号【】或转义，避免 JS 解析错误
+// ── 题库 ──────────────────────────────────────────────
 const questions = [
-  { q:'进入陌生环境时，你更在意：', sel:null, options:[
-    { text:'先观察规则与秩序',   score:{order:2} },
-    { text:'快速结识关键人物',   score:{social:2} },
-    { text:'找安全出口与路径',   score:{guard:2} },
-    { text:'随性探索，边走边看', score:{explore:2} },
-  ]},
-  { q:'面临突发状况时，你往往：', sel:null, options:[
-    { text:'冷静评估再行动',     score:{guard:2} },
-    { text:'拉人组队一起解决',   score:{social:2} },
-    { text:'先稳住表面秩序',     score:{order:2} },
-    { text:'大胆试错寻找突破',   score:{explore:2} },
-  ]},
-  { q:'与陌生人同桌，你会：', sel:null, options:[
-    { text:'礼貌寒暄，保持分寸',   score:{order:2} },
-    { text:'打开话匣子，迅速热络', score:{social:2} },
-    { text:'观察对方细节再决定',   score:{guard:2} },
-    { text:'抛出奇特话题活跃气氛', score:{explore:2} },
-  ]},
-  // ★ 原来这里 "安全感" 的弯引号导致 SyntaxError，改用直角引号
-  { q:'更看重的【安全感】来源是：', sel:null, options:[
-    { text:'清晰规则和稳定预期', score:{order:2} },
-    { text:'可靠的人脉与互助',   score:{social:2} },
-    { text:'自我控制与备份方案', score:{guard:2} },
-    { text:'随机应变与自由空间', score:{explore:2} },
-  ]},
-  { q:'当计划被打乱时，你：', sel:null, options:[
-    { text:'重新排程，确保每步可控', score:{order:2} },
-    { text:'看看谁能帮我一把',       score:{social:2} },
-    { text:'优先减少损失，保留底线', score:{guard:2} },
-    { text:'顺势而为，也许是机会',   score:{explore:2} },
-  ]},
-  // ★ 同理，"秘密" 的弯引号也改掉
-  { q:'你对【秘密】的态度：', sel:null, options:[
-    { text:'不轻易分享，分层管理', score:{guard:2} },
-    { text:'合适时建立信任与交换', score:{social:2} },
-    { text:'记录、归档、设置权限', score:{order:2} },
-    { text:'秘密是故事的一部分',   score:{explore:2} },
-  ]},
-  { q:'在团队中更自然的角色：', sel:null, options:[
-    { text:'秩序维护者 / 流程官', score:{order:2} },
-    { text:'气氛与关系中枢',       score:{social:2} },
-    { text:'风险官 / 守门人',      score:{guard:2} },
-    { text:'点子王 / 破局者',      score:{explore:2} },
-  ]},
-  { q:'面对白莲花大饭店的邀请，你会：', sel:null, options:[
-    { text:'先研究入住须知与规约',   score:{order:2} },
-    { text:'问问熟人有没有门道',     score:{social:2} },
-    { text:'确认人身与隐私保护措施', score:{guard:2} },
-    { text:'马上订票，去现场再说',   score:{explore:2} },
-  ]},
+  {
+    q:"如果你醒来发现自己正坐在酒店大堂沙发上，口袋里有一张房卡，但不记得怎么来的，你会：",
+    sel:null,
+    options:[
+      { text:"去前台问清楚", score:1 },
+      { text:"上楼试试看是哪间房", score:2 },
+      { text:"把房卡交给最近的员工", score:1 },
+      { text:"把它藏起来，看看谁会来找你", score:2 }
+    ]
+  },
+  {
+    q:"哪一段话最接近你的内心独白？",
+    sel:null,
+    options:[
+      { text:"\"只要我不说，事情就不算发生过。\"", score:2 },
+      { text:"\"我一直在扮演别人期待的样子。\"", score:2 },
+      { text:"\"我很擅长记住别人的表情，但忘记他们说了什么。\"", score:1 },
+      { text:"\"没有人真的会关心你几点退房。\"", score:1 }
+    ]
+  },
+  {
+    q:"你最想在手帐中记录哪一类内容？",
+    sel:null,
+    options:[
+      { text:"密码和暗号", score:2 },
+      { text:"日常琐碎+不愿忘记的梦", score:1 },
+      { text:"和某人发生的争执与沉默", score:1 },
+      { text:"某天有人路过你门口留下的纸条", score:2 }
+    ]
+  },
+  {
+    q:"以下哪个场景最让你不安？",
+    sel:null,
+    options:[
+      { text:"电梯在你没按的楼层停下", score:2 },
+      { text:"房间里的镜子似乎多了一面", score:1 },
+      { text:"服务员用一个你没告诉过谁的称呼叫你", score:2 },
+      { text:"手帐中出现了不属于你字迹的一页", score:1 }
+    ]
+  },
+  {
+    q:"你认为酒店员工最大的美德是：",
+    sel:null,
+    options:[
+      { text:"保持沉默", score:2 },
+      { text:"快速记忆贵宾偏好", score:1 },
+      { text:"精准执行未解释的命令", score:2 },
+      { text:"知道什么时候看得见，什么时候看不见", score:2 }
+    ]
+  },
+  {
+    q:"你愿意哪一张贴纸出现在你书写的那一页？",
+    sel:null,
+    options:[
+      { text:"一只戴白手套的手指在\"嘘\"你", score:2 },
+      { text:"一支空酒杯，下面印着\"1935\"", score:1 },
+      { text:"一朵枯萎的白莲花，写着\"请勿打扰\"", score:1 },
+      { text:"一台开着门的电梯，没有人下车", score:2 }
+    ]
+  },
+  {
+    q:"如果要撒一个谎，最可能是：",
+    sel:null,
+    options:[
+      { text:"\"我没看到他进去。\"", score:2 },
+      { text:"\"这是我第一次来。\"", score:1 },
+      { text:"\"我只是路过。\"", score:2 },
+      { text:"\"那本手帐不是我的。\"", score:1 }
+    ]
+  },
+  {
+    q:"你是否曾经在日常生活中：",
+    sel:null,
+    options:[
+      { text:"记得别人忘记的细节", score:1 },
+      { text:"梦见过某个不存在的房间", score:2 },
+      { text:"在记录日记时感到某页\"不属于你\"", score:2 },
+      { text:"看过陌生人的笔记却产生熟悉感", score:1 }
+    ]
+  },
+  {
+    q:"以下哪一页你最想先翻开？",
+    sel:null,
+    options:[
+      { text:"\"锅炉房 · 夜班登记记录\"页", score:2 },
+      { text:"\"湖景餐厅 · 狙击角度示意图\"页", score:1 },
+      { text:"\"404房间 · 空白纸张焚毁记录\"页", score:2 },
+      { text:"\"礼宾寄存 · 私人物品拒收清单\"页", score:1 }
+    ]
+  },
+  {
+    q:"你希望这两本手帐为你达成什么目的？",
+    sel:null,
+    options:[
+      { text:"留下线索，让别人找到你", score:2 },
+      { text:"记录细节，为日后回忆", score:1 },
+      { text:"掩盖真相，让某些事情永远沉默", score:2 },
+      { text:"完成一个从未有机会说出口的故事", score:1 }
+    ]
+  }
 ];
 
+// ── DOM ───────────────────────────────────────────────
 const qEl      = document.getElementById('question');
 const optsEl   = document.getElementById('options');
 const prevBtn  = document.getElementById('prevBtn');
@@ -221,83 +265,125 @@ const progEl   = document.getElementById('progress');
 const resultEl = document.getElementById('result');
 const qBox     = document.getElementById('qBox');
 
-let cur = -1;
+let cur = -1;   // -1 = 欢迎页
 
+// ── 渲染 ──────────────────────────────────────────────
 function render() {
   resultEl.style.display = 'none';
+
   if (cur < 0) {
-    qEl.textContent     = '准备好开始了吗？';
-    optsEl.innerHTML    = '';
+    qEl.textContent   = '准备好开始了吗？';
+    optsEl.innerHTML  = '';
     nextBtn.textContent = '开始';
-    nextBtn.disabled    = false;
-    prevBtn.disabled    = true;
-    progEl.style.width  = '0%';
+    nextBtn.disabled  = false;
+    prevBtn.disabled  = true;
+    progEl.style.width = '0%';
     return;
   }
+
   const data = questions[cur];
-  qEl.textContent = '第 ' + (cur + 1) + ' 题 / 共 ' + questions.length + ' 题：' + data.q;
+  qEl.textContent = `第 ${cur + 1} 题 / 共 ${questions.length} 题：${data.q}`;
+
+  // 渲染选项
   optsEl.innerHTML = '';
-  data.options.forEach(function(op, i) {
-    var btn = document.createElement('button');
+  data.options.forEach((op, i) => {
+    const btn = document.createElement('button');
     btn.type      = 'button';
     btn.className = 'option' + (data.sel === i ? ' selected' : '');
     btn.textContent = op.text;
-    btn.addEventListener('click', function(){ pick(i); });
+    btn.addEventListener('click', () => pick(i));
     optsEl.appendChild(btn);
   });
+
   nextBtn.textContent = cur < questions.length - 1 ? '下一题' : '查看结果';
-  nextBtn.disabled    = false;
-  prevBtn.disabled    = cur === 0;
-  progEl.style.width  = Math.round((cur / questions.length) * 100) + '%';
+  nextBtn.disabled  = false;
+  prevBtn.disabled  = cur === 0;
+
+  // 进度条：完成题数 / 总题数
+  progEl.style.width = Math.round(((cur + 1) / questions.length) * 100) + '%';
 }
 
+// ── 选择选项 ──────────────────────────────────────────
 function pick(i) {
   questions[cur].sel = i;
-  Array.from(optsEl.children).forEach(function(el, idx) {
-    el.classList.toggle('selected', idx === i);
-  });
+  [...optsEl.children].forEach((el, idx) =>
+    el.classList.toggle('selected', idx === i)
+  );
 }
 
+// ── 计算结果 ──────────────────────────────────────────
 function showResult() {
-  var sc = { order:0, social:0, guard:0, explore:0 };
-  questions.forEach(function(q) {
+  let totalScore = 0;
+  questions.forEach(q => {
     if (q.sel !== null) {
-      Object.keys(q.options[q.sel].score).forEach(function(k) {
-        sc[k] += q.options[q.sel].score[k];
-      });
+      totalScore += q.options[q.sel].score;
     }
   });
-  var labels = {
-    order:  ['秩序派',  '尊重规则，重视流程与稳定，是团队里的秩序锚。'],
-    social: ['社交派',  '善于连接与协作，关系网络就是你的资源池。'],
-    guard:  ['守护派',  '谨慎而稳健，风险意识强，是关键时刻的刹车与盾牌。'],
-    explore:['探索派',  '好奇且勇于打破边界，喜欢从不确定中寻宝。'],
-  };
-  var top = Object.keys(sc).sort(function(a,b){ return sc[b]-sc[a]; })[0];
-  progEl.style.width  = '100%';
-  nextBtn.disabled    = true;
+
+  let result = '';
+  if (totalScore >= 10 && totalScore <= 14) {
+    result = `
+      <strong style="color:var(--accent);font-size:1.1rem">
+        建议入住 · 贵宾欢迎函
+      </strong><br><br>
+      您的记忆仍完整，意识尚可辨识真伪，非常适合体验白莲花大饭店的套房生活。<br>
+      但请注意，一旦入睡，可能会被误认为"长期住客"。
+    `;
+  } else if (totalScore >= 15 && totalScore <= 20) {
+    result = `
+      <strong style="color:var(--accent);font-size:1.1rem">
+        建议入职 · 编号待分配
+      </strong><br><br>
+      您的行为逻辑、判断机制与记忆漏洞均符合本店用人标准。<br>
+      礼宾部将为您准备制服、档案袋与"特别培训"页面，<br>
+      请尽快熟悉8号电梯的规避技巧。
+    `;
+  }
+
+  progEl.style.width = '100%';
   resultEl.style.display = 'block';
-  resultEl.innerHTML =
-    '<strong style="color:var(--accent);font-size:1.05rem">🏨 你的入住倾向：' + labels[top][0] + '</strong><br><br>' +
-    labels[top][1] + '<br><br>' +
-    '<span style="font-size:.88rem">维度得分 ▸ 秩序 ' + sc.order +
-    ' ｜ 社交 ' + sc.social +
-    ' ｜ 守护 ' + sc.guard +
-    ' ｜ 探索 ' + sc.explore + '</span>';
+  resultEl.innerHTML = `
+    ${result}<br><br>
+    <span style="font-size:.9rem">
+      总得分：${totalScore} 分
+    </span>
+  `;
+  nextBtn.disabled = true;
   qBox.scrollIntoView({ behavior:'smooth', block:'start' });
 }
 
-nextBtn.addEventListener('click', function() {
-  if (cur === -1)                        { cur = 0; render(); return; }
-  if (questions[cur].sel === null)       { alert('请先选择一个选项 \uD83D\uDE0A'); return; }
-  if (cur < questions.length - 1)       { cur++; render(); return; }
+// ── 按钮事件 ──────────────────────────────────────────
+nextBtn.addEventListener('click', () => {
+  // 欢迎页 → 第一题
+  if (cur === -1) {
+    cur = 0;
+    render();
+    return;
+  }
+  // 未选择
+  if (questions[cur].sel === null) {
+    alert('请先选择一个选项 😊');
+    return;
+  }
+  // 还有下一题
+  if (cur < questions.length - 1) {
+    cur++;
+    render();
+    return;
+  }
+  // 最后一题 → 结果
   showResult();
 });
 
-prevBtn.addEventListener('click', function() {
-  if (cur > 0) { cur--; nextBtn.disabled = false; render(); }
+prevBtn.addEventListener('click', () => {
+  if (cur > 0) {
+    cur--;
+    nextBtn.disabled = false;
+    render();
+  }
 });
 
+// ── 初始化 ────────────────────────────────────────────
 render();
 </script>
 </body>
