@@ -13,44 +13,30 @@
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
-      "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.6}
+      "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.8}
     .container{width:100%;max-width:920px;margin:0 auto;padding:0 18px}
 
     /* Hero */
     .hero{
-      position:relative;width:100%;height:500px;
-      display:flex;align-items:flex-end;justify-content:center;text-align:center;
-      overflow:hidden;border-bottom:0px solid var(--line);background:#0a0806;
+      position:relative;width:100%;
+      display:block;
     }
-    .hero::before{
-      content:"";position:absolute;inset:0;
-      background-image:url('./images/hero.jpg');
-      background-size:cover;background-position:center center;
-      filter:brightness(1) saturate(1);
+    .hero-img{
+      width:100%;height:auto;display:block;
     }
-    .hero::after{
-      content:"";position:absolute;inset:0;
-      background:radial-gradient(60% 60% at 50% 40%,rgba(10,8,6,0) 0%,rgba(10,8,6,0) 55%,rgba(10,8,6,0) 100%),
-        linear-gradient(to bottom,rgba(10,8,6,0),rgba(10,8,6,0));
-    }
-    .hero-content{position:relative;z-index:1;padding:1.6rem 1rem 2rem;text-shadow:0 2px 8px var(--shadow);display:none}
-    .hero-title{margin:0 0 .3rem;font-size:2.4rem;letter-spacing:.08em;font-weight:700;display:none}
-    .hero-subtitle{margin:.2rem 0 .6rem;color:var(--muted);font-size:1.1rem;letter-spacing:.06em;display:none}
-    .hero-quote{margin-top:.3rem;color:var(--accent);opacity:.92;font-style:italic;font-size:.95rem;display:none}
-    .divider{width:100px;height:1px;background:var(--line);margin:.8rem auto 0;opacity:.9;display:none}
 
     /* 内容卡片 */
     .section{
-      background:linear-gradient(180deg,var(--card),var(--card2));
-      border:1px solid var(--line);border-radius:12px;padding:22px 18px;
-      box-shadow:0 8px 28px var(--shadow);
-      margin:240px auto 32px; /* 增加顶部间距到400px */
+      background:transparent;
+      border:none;padding:24px 18px 22px;
+      box-shadow:none;
+      margin:0 auto 32px;
       position:relative;z-index:2;
     }
-    .intro{color:var(--muted);margin-bottom:14px;text-align:justify}
+    .intro{color:var(--muted);text-align:justify;text-align: center;margin: 0;}
 
     .progress-container{
-      margin:14px 0 18px;background:#141210;
+      margin:24px 0 18px;background:#141210;
       border:1px solid var(--line);border-radius:999px;padding:6px;
     }
     .progress{
@@ -63,27 +49,27 @@
       margin-top:36px;background:#151310;
       border:1px solid var(--line);border-radius:10px;padding:16px;
     }
-    .question{font-size:1.1rem;margin:0 0 14px;line-height:1.5}
-    .options{display:grid;gap:10px}
+    .question{font-size:15px;margin:0;line-height:1.5;text-align:left;margin-bottom: 12px;}
+    .options{display:grid;gap:12px}
 
     /* ★ 关键：option 必须是 block 级，宽度撑满 */
     .option{
       display:block;width:100%;
-      padding:12px 14px;border:1px solid var(--line);border-radius:8px;
-      background:#191714;color:var(--text);cursor:pointer;
+      padding:14px 16px;border:1px solid var(--line);border-radius:8px;
+      background:transparent;color:var(--text);cursor:pointer;
       transition:all .2s ease;text-align:left;font-size:1rem;
     }
-    .option:hover{border-color:var(--accent);background:#201d18}
+    .option:hover{border-color:var(--accent);background:rgba(197,155,90,0.05)}
     .option.selected{
-      border-color:var(--accent);background:#222018;
+      border-color:var(--accent);background:rgba(197,155,90,0.1);
       box-shadow:0 0 0 1px var(--accent) inset;
     }
 
-    .actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .actions{display:flex;gap:10px;margin-top:24px;}
     .btn{
-      padding:10px 20px;border-radius:8px;border:1px solid var(--line);
+      padding:8px 20px;border-radius:8px;border:1px solid var(--line);
       background:#1d1a16;color:var(--text);cursor:pointer;
-      transition:all .2s ease;font-size:1rem;
+      transition:all .2s ease;font-size:14px;flex: 1;
     }
     .btn:hover{border-color:var(--accent);background:#242018}
     .btn:disabled{opacity:.4;cursor:not-allowed}
@@ -98,30 +84,20 @@
       border-radius:10px;background:#16130f;color:var(--muted);line-height:1.8;
     }
 
-    footer{color:var(--muted);opacity:.8;text-align:center;padding:28px 18px 40px}
+    footer{color:var(--muted);opacity:.8;text-align:center;padding:20px 18px 40px;font-size: 13px;}
 
     @media(max-width:768px){
-      .hero{height:280px}
-      .hero-title{font-size:2rem}
-      .section{margin-top:20px}
+      .section{margin-top:0px}
     }
     @media(max-width:480px){
-      .hero{height:240px}
-      .hero-title{font-size:1.7rem}
-      .hero-subtitle{font-size:.92rem}
-      .section{margin-top:20px}
+      .section{margin-top:0px}
     }
   </style>
 </head>
 <body>
 
 <header class="hero" role="banner">
-  <div class="hero-content">
-    <h1 class="hero-title">白莲花大饭店</h1>
-    <div class="hero-subtitle">文创测试</div>
-    <div class="divider"></div>
-    <p class="hero-quote">"跟着第一反应作答"</p>
-  </div>
+  <img src="./images/hero.jpg" alt="白莲花大饭店" class="hero-img" />
 </header>
 
 <main class="container">
